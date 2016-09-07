@@ -7,7 +7,7 @@ function Board(){
         // draw board background
         // draw deck
         // draw each stack
-    }
+    };
 }
 
 function Game(){
@@ -56,6 +56,7 @@ function Deck(firstVals, secondVals){
      this.cards.push(card);
    }
   }
+  this.shuffle();
 }
 
 Deck.prototype.shuffle = function(){
@@ -68,5 +69,40 @@ Deck.prototype.shuffle = function(){
 }
 
 Deck.prototype.show = function(){
-  
+  fill(100);
+  rect(200, 200, 60, 80);
+  fill(255);
+  text("DECK", 213, 240);
+  for (var i = 0; i < 10; i++){
+      fill(40);
+      rect(200 + i * 70, 330, 60, 80);
+      // choose colour based on colour property of card
+      fill(255,0,0);
+      text(this.cards[i].colour, 210 + i * 70, 350);
+      text(this.cards[i].cost, 210 + i * 70, 380);
+  }
+}
+
+var canvas;
+var deck;
+var rendererer;
+var pressed;
+
+function setup(){
+    canvas = createCanvas(1200, 800);
+    deck = new Deck([1, 2, 3, 4, 5], [0, 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+    background(0, 255, 0);
+    pressed = false;
+}
+
+function draw(){
+    deck.show();
+    if (mouseIsPressed && ! pressed){
+        pressed = true;
+        var x = mouseX;
+        var y = mouseY;
+        // select card
+    } else if (pressed && ! mouseIsPressed){
+        pressed = false;
+    }
 }
