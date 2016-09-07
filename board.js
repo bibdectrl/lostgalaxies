@@ -1,13 +1,52 @@
+const RED = 0;
+const BLUE = 1;
+const WHITE = 2;
+const GREEN = 3;
+const BLACK = 4;
+
 function Board(){
     this.width = 800;
     this.height = 600;
     this.cards = new Deck();
-    this.stacks = [new Stack("red"), new Stack("blue")];
+    this.player1 = new Player(this);
+    this.player2 = new Player(this);
+
     this.draw = function(){
         // draw board background
         // draw deck
         // draw each stack
     };
+}
+
+
+function Player(){
+    this.cards = [];
+    this.stacks = [new Stack(0), new Stack(1), new Stack(2), new Stack(3), new Stack(4)];
+    this.score = function(){
+       var score = 0;
+       for (var i = 0; i < this.stacks.length; i++){
+         if (this.stacks[i].length > 0){
+            var mult = 1;
+            var tempScore = -20;
+            for (var j = 0; j < this.stacks[j].cards.length; j++){
+              var cost = this.stacks[i].cards[j].cost;
+              if (cost === 0){
+                mult++;
+              }
+              else {
+                tempScore += cost;
+              }
+            }
+            tempScore *= mult;
+            score += tempScore;
+         }
+       }
+       return score;
+    };
+    this.draw = function(){
+      //draw stacks
+      //draw hand
+    }
 }
 
 function Game(){
@@ -23,29 +62,26 @@ function Stack(colour){
     this.addCard = function(card){
         this.cards.push(card);
     };
-    this.removeCard = function(){
-        return this.cards.pop();
-    };
     this.canAdd = function(card){
-        return card.colour === this.colour && card.value >= this.cards[this.cards.length - 1].value || this.cards.length === 0;
+        return card.colour === this.colour && (this.cards.length === 0 || card.cost >= this.cards[this.cards.length - 1].cost);
     }
-    
+
     this.draw = function(){
-        
+
     };
 }
 
 function Card(colour, cost){
   this.colour = colour;
   this.cost = cost;
-}	
+}
 
 function CardRenderer(deck){
   this.deck = deck;
 }
 
 CardRenderer.prototype.show = function(){
-  
+
 }
 
 function Deck(firstVals, secondVals){
@@ -106,3 +142,4 @@ function draw(){
         pressed = false;
     }
 }
+
