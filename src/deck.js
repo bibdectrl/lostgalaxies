@@ -18,15 +18,15 @@ Deck.prototype.shuffle = function(){
   }
 }
 
-Deck.prototype.show = function(){
+Deck.prototype.dealCard = function(){
+  var card = this.cards.pop();
+  return card;
+}
+
+Deck.prototype.draw = function(){
   fill(100);
   rect(200, 200, 60, 80);
   fill(255);
   textSize(12);
   text("DECK", 213, 240);
-  for (var i = 0; i < 10; i++){
-      fill(40);
-      rect(200 + i * 70, 330, 60, 80);
-      this.cards[i].draw(200 + i * 70, 330);
-  }
 }

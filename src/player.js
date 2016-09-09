@@ -22,8 +22,7 @@ function Player(){
        }
        return score;
     };
-    this.draw = function(){
-      //draw stacks
-      //draw hand
-    }
+    this.addCard = function(card){
+      this.cards.push(card);
+    };
 }

@@ -1,13 +1,11 @@
 var canvas;
-var deck;
-var rendererer;
+var game;
 var pressed;
 var images;
-var testCard;
 
 function setup(){
     canvas = createCanvas(1200, 800);
-    deck = new Deck([0, 1, 2, 3, 4], [0, 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+    game = new Game();
     background(0, 255, 0);
     images = [loadImage("res/bluewithstars_base.png"), 
               loadImage("res/brownwithstars_base.png"), 
@@ -15,13 +13,16 @@ function setup(){
               loadImage("res/purplewithstars_base.png"), 
               loadImage("res/redwithstars_base.png"), 
     ];
-    testCard = new Card(0, 5);
-
-    
+    big_images = [loadImage("res/bluewithstars_big.png"), 
+              loadImage("res/brownwithstars_big.png"), 
+              loadImage("res/greenwithstars_big.png"), 
+              loadImage("res/purplewithstars_big.png"), 
+              loadImage("res/redwithstars_big.png"), 
+    ];
 }
 
 function draw(){
-    deck.show();
+    game.draw();
     if (mouseIsPressed && ! pressed){
         pressed = true;
         var x = mouseX;
